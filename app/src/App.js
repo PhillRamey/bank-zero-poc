@@ -11,7 +11,6 @@ class App extends Component {
     return (
       <div>
         <NavBar/>
-        <p>Work in progress.</p>
         <Route exact path="/" component={HomePage}/>
         <Route path="/callback" component={CallbackPage}/>
         <Route path="/dashboard" component={DashboardPage}/>
