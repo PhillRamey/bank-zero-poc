@@ -29,6 +29,6 @@ app.get('/', (req, res) => {
 });
 
 // start the server
-app.listen(8081, () => {
-  console.log('listening on port 8081');
+app.listen(3001, () => {
+  console.log('listening on port 3001');
 });
