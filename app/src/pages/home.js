@@ -14,11 +14,11 @@ const HomePage = () => (
       authenticated ? (
         <Redirect to="/dashboard" />
       ) : (
-        <div class="jumbotron">
+        <div className="jumbotron">
           <ErrorPanel message={errorDescription}/>
-          <h1 class="display-4">Welcome to Bank Zero!</h1>
-          <p class="lead">This is a simple proof of concept to demonstrate how Bank Zero can modernize its consumer identity platform.</p>
-          <hr class="my-4" />
+          <h1 className="display-4">Welcome to Bank Zero!</h1>
+          <p className="lead">This is a simple proof of concept to demonstrate how Bank Zero can modernize its consumer identity platform.</p>
+          <hr className="my-4" />
           <p>To get started, just log in.</p>
           <Login/>
         </div>

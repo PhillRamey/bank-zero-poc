@@ -3,7 +3,6 @@ import { Redirect } from "react-router-dom";
 
 import { AuthConsumer } from "../authContext";
 //import Can from "../components/Can";
-import Logout from "../components/Logout";
 
 const DashboardPage = () => (
   <AuthConsumer>
@@ -11,7 +10,7 @@ const DashboardPage = () => (
       authenticated ? (
         <div>
             <h1>Dashboard<br/>
-              <small class="text-muted">Welcome to your Bank Zero account.</small>
+              <small className="text-muted">Welcome to your Bank Zero account.</small>
             </h1>
         </div>
       ) : (
