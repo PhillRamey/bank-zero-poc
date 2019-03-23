@@ -5,7 +5,7 @@ import { AuthConsumer } from "../authContext";
 const Login = () => (
   <AuthConsumer>
     {({ initiateLogin }) => (
-      <button className="btn btn-sm btn-primary" onClick={initiateLogin}>
+      <button className="btn btn-secondary" onClick={initiateLogin}>
         Login
       </button>
     )}

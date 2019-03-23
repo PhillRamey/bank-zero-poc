@@ -14,10 +14,13 @@ const HomePage = () => (
       authenticated ? (
         <Redirect to="/dashboard" />
       ) : (
-        <div>
+        <div class="jumbotron">
           <ErrorPanel message={errorDescription}/>
-          <h2>Welcome to React RBAC Tutorial.</h2>
-          <Login />
+          <h1 class="display-4">Welcome to Bank Zero!</h1>
+          <p class="lead">This is a simple proof of concept to demonstrate how Bank Zero can modernize its consumer identity platform.</p>
+          <hr class="my-4" />
+          <p>To get started, just log in.</p>
+          <Login/>
         </div>
       )
     }

@@ -10,9 +10,10 @@ const DashboardPage = () => (
     {({ authenticated }) =>
       authenticated ? (
         <div>
-            <h1>Dashboard</h1>
-            <Logout />
-          </div>
+            <h1>Dashboard<br/>
+              <small class="text-muted">Welcome to your Bank Zero account.</small>
+            </h1>
+        </div>
       ) : (
         <Redirect to="/" />
       )
