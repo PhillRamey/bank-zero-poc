@@ -11,7 +11,7 @@ const auth = new auth0.WebAuth({
   redirectUri: AUTH_CONFIG.callbackUrl,
   audience: AUTH_CONFIG.apiUrl,
   responseType: 'token id_token',
-  scope: 'openid profile'
+  scope: 'openid profile read:customers read:employees'
 });
 
 class Auth extends Component {
