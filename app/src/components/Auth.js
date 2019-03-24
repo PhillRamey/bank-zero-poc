@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import auth0 from "auth0-js";
+import axios from 'axios';
 
 import {AUTH_CONFIG} from "../auth0-variables";
 import {AuthProvider} from "../authContext";
@@ -17,7 +18,7 @@ class Auth extends Component {
   state = {
     authenticated: false,
     user: {
-      role: "visitor"
+      permissions: []
     },
     accessToken: ""
   };
@@ -36,7 +37,7 @@ class Auth extends Component {
     this.setState({
       authenticated: false,
       user: {
-        role: "visitor"
+        permissions: []
       },
       accessToken: ""
     });
@@ -54,22 +55,26 @@ class Auth extends Component {
         this.logout(error.errorDescription);
         return;
       }
-  
-      this.setSession(authResult.idTokenPayload);
+      this.setSession(authResult);
     });
   };
 
   setSession(data) {
-    const user = {
-      id: data.sub,
-      email: data.email,
-      role: data[AUTH_CONFIG.apiUrl]
-    };
-    this.setState({
-      authenticated: true,
-      accessToken: data.accessToken,
-      user
-    });
+    axios.get('http://localhost:3001/permissions', { headers: { 'Authorization': `Bearer ${data.accessToken}`}})
+      .then(response => {
+        const user = {
+          id: data.idTokenPayload.sub,
+          email: data.idTokenPayload.email,
+          permissions: response.data
+        };
+        this.setState({
+          authenticated: true,
+          accessToken: data.accessToken,
+          user
+        });
+        console.log(this.state);
+      })
+      .catch(error => console.log(error));
   }
 
   render() {
