@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import NavBar from './components/NavBar';
 import CallbackPage from './pages/callback';
-import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import HomePage from './pages/home';
 import DashboardPage from './pages/dashboard';
-import Auth from "./components/Auth";
 
 class App extends Component {
   render() {
