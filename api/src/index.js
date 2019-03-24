@@ -51,6 +51,12 @@ const checkJwt = jwt({
   algorithms: ['RS256']
 });
 
+//roles and their ID
+const roles = {
+  customer: 'rol_knjusLtm4f4DD8G7',
+  employee: 'rol_iJ4iTpYOPHrW6VH9',
+  manager: 'rol_0p7iXed9JVRrYHcH'
+}
 const canViewCustomers = jwtAuthz([ 'read:customers' ]);
 const canViewEmployees = jwtAuthz([ 'read:employees' ]);
 
@@ -72,7 +78,7 @@ app.get('/customers', checkJwt, canViewCustomers, (req, res) => {
     .then(response => {
       axios({
         method: 'get',
-        url: `https://${process.env.AUTH0_DOMAIN}/api/v2/roles/rol_knjusLtm4f4DD8G7/users`,
+        url: `https://${process.env.AUTH0_DOMAIN}/api/v2/roles/${roles.customer}/users`,
         headers: {
           Authorization: `Bearer ${response.data.access_token}`
         }
@@ -99,7 +105,7 @@ app.get('/employees', checkJwt, canViewEmployees, (req, res) => {
     .then(response => {
       axios({
         method: 'get',
-        url: `https://${process.env.AUTH0_DOMAIN}/api/v2/roles/rol_iJ4iTpYOPHrW6VH9/users`,
+        url: `https://${process.env.AUTH0_DOMAIN}/api/v2/roles/${roles.employee}/users`,
         headers: {
           Authorization: `Bearer ${response.data.access_token}`
         }
