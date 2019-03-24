@@ -85,6 +85,33 @@ app.get('/customers', checkJwt, canViewCustomers, (req, res) => {
     .catch(error => console.log(error));
 });
 
+app.get('/employees', checkJwt, canViewEmployees, (req, res) => {
+  axios({ 
+    method: 'post',
+    url: `https://${process.env.AUTH0_DOMAIN}/oauth/token`,
+    data: {
+      grant_type: 'client_credentials',
+      client_id: process.env.AUTH0_CLIENT_ID,
+      client_secret: process.env.AUTH0_CLIENT_SECRET,
+      audience: `https://${process.env.AUTH0_DOMAIN}/api/v2/`  
+    }
+  })
+    .then(response => {
+      axios({
+        method: 'get',
+        url: `https://${process.env.AUTH0_DOMAIN}/api/v2/roles/rol_iJ4iTpYOPHrW6VH9/users`,
+        headers: {
+          Authorization: `Bearer ${response.data.access_token}`
+        }
+      })
+      .then(response => {
+        res.send(response.data);
+      })
+      .catch(error => console.log(error));
+    })
+    .catch(error => console.log(error));
+});
+
 // start the server
 app.listen(3001, () => {
   console.log('listening on port 3001');
