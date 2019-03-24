@@ -1,6 +1,6 @@
 function (user, context, callback) {
 
-  const whitelist = ['musubilabs.com', 'teampandy.club']; //authorized domains
+  const whitelist = ['musubilabs.com', 'teampandy.club', 'bankzero.xyz']; //authorized domains
   const userHasAccess = whitelist.some(
       function (domain) {
         const emailSplit = user.email.split('@');
