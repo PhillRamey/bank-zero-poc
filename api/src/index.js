@@ -7,6 +7,7 @@ const morgan = require('morgan');
 const jwt = require('express-jwt');
 const jwtAuthz = require('express-jwt-authz');
 const jwksRsa = require('jwks-rsa');
+const axios = require('axios');
 require('dotenv').config();
 
 if (!process.env.AUTH0_DOMAIN || !process.env.AUTH0_AUDIENCE) {
@@ -50,8 +51,38 @@ const checkJwt = jwt({
   algorithms: ['RS256']
 });
 
+const canViewCustomers = jwtAuthz([ 'read:customers' ]);
+const canViewEmployees = jwtAuthz([ 'read:employees' ]);
+
 app.get('/permissions', checkJwt, (req, res) => {
   res.send(req.user.permissions);
+});
+
+app.get('/customers', checkJwt, canViewCustomers, (req, res) => {
+  axios({ 
+    method: 'post',
+    url: `https://${process.env.AUTH0_DOMAIN}/oauth/token`,
+    data: {
+      grant_type: 'client_credentials',
+      client_id: process.env.AUTH0_CLIENT_ID,
+      client_secret: process.env.AUTH0_CLIENT_SECRET,
+      audience: `https://${process.env.AUTH0_DOMAIN}/api/v2/`  
+    }
+  })
+    .then(response => {
+      axios({
+        method: 'get',
+        url: `https://${process.env.AUTH0_DOMAIN}/api/v2/roles/rol_knjusLtm4f4DD8G7/users`,
+        headers: {
+          Authorization: `Bearer ${response.data.access_token}`
+        }
+      })
+      .then(response => {
+        res.send(response.data);
+      })
+      .catch(error => console.log(error));
+    })
+    .catch(error => console.log(error));
 });
 
 // start the server
