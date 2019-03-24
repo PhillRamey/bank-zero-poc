@@ -6,7 +6,7 @@ import CustomerPanel from "../components/CustomerPanel.js";
 
 const DashboardPage = () => (
   <AuthConsumer>
-    {({ authenticated, user }) =>
+    {({ authenticated, user, accessToken }) =>
       authenticated ? (
         <div className="container">
             <h1>Dashboard<br/>
@@ -16,6 +16,7 @@ const DashboardPage = () => (
             <p>{user.id}</p>
             <p>{user.name}</p>
             <p>{user.permissions}</p>
+            <p>{accessToken}</p>
         </div>
       ) : (
         <Redirect to="/" />
