@@ -2,38 +2,26 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 
 import { AuthConsumer } from "../authContext";
-//import Can from "../components/Can";
+import CustomerPanel from "../components/CustomerPanel.js";
 
 const DashboardPage = () => (
   <AuthConsumer>
-    {({ authenticated }) =>
+    {({ authenticated, user }) =>
       authenticated ? (
-        <div>
+        <div className="container">
             <h1>Dashboard<br/>
               <small className="text-muted">Welcome to your Bank Zero account.</small>
             </h1>
+            <CustomerPanel permissions={user.permissions} />
+            <p>{user.id}</p>
+            <p>{user.name}</p>
+            <p>{user.permissions}</p>
         </div>
       ) : (
         <Redirect to="/" />
       )
     }
   </AuthConsumer>
-
-  /*  <AuthConsumer>
-    {({ user }) => (
-      <Can
-        role={user.role}
-        perform="dashboard-page:visit"
-        yes={() => (
-          <div>
-            <h1>Dashboard</h1>
-            <Logout />
-          </div>
-       )}
-        no={() => <Redirect to="/" />}
-      />
-    )}
-  </AuthConsumer>*/
 );
 
 export default DashboardPage;

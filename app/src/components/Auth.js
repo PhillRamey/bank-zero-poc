@@ -60,11 +60,13 @@ class Auth extends Component {
   };
 
   setSession(data) {
+    console.log(data);
     axios.get('http://localhost:3001/permissions', { headers: { 'Authorization': `Bearer ${data.accessToken}`}})
       .then(response => {
         const user = {
           id: data.idTokenPayload.sub,
-          email: data.idTokenPayload.email,
+          name: data.idTokenPayload.name,
+          nickname: data.idTokenPayload.nickname,
           permissions: response.data
         };
         this.setState({
