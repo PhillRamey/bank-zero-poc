@@ -25,7 +25,7 @@ If you haven't already, [create a free Auth0 account](https://auth0.com/signup).
 **Create and configure the client app**
 1. Create a new applicaiton and select "Single Page Web App" as the application type
 2. Select the "Settings" tab and:
-2a. Enter `http://localhost:3000/callback` into the Allowed Callback URLs field
+  2a. Enter `http://localhost:3000/callback` into the Allowed Callback URLs field
 2b. Enter `http://localhost:3000` into the Allowed Web Origins and Allowed Logout URLs fields
 2c. Save your changes
 
@@ -42,11 +42,30 @@ If you haven't already, [create a free Auth0 account](https://auth0.com/signup).
 **Create and configure roles**
 1. Access the [roles](https://manage.auth0.com/#/roles) section of the Auth0 Dashboard
 2. Click the "Create Role" button to create each of the three roles and add the relevant permissions
-2a. Customer
+2a. Customer (no permissions)
 2b. Employee - `read:customers`
 2c. Manager - `read:customers` `read:employees`
 
 ### API
+All steps detailed below relat to the files contained within the `api` directory.
+
+**Install dependencies**
+In your terminal, within the `api` directory, enter the following command to install the project dependencies:
+```
+npm i body-parser cors express helmet morgan express-jwt express-jwt-authz jwks-rsa axios
+```
+**Set environment variables**
+1. Rename the `.env.example` file to `.env`
+2. Enter the API Audience value for the [API](https://manage.auth0.com/#/apis)
+3. Find the Machine to Machine [application](https://manage.auth0.com/#/applications) for your API and enter the domain, client ID, and client secret values
+
+**Update role IDs**
+1. Within the `index.js` file, find the line that begins with `const roles`
+2. For each of the listed roles, replace the role ID to match the roles you created earlier in the Auth0 Dashboard. One method to find the ID is to access the role within the Auth0 dashboard. This will load a page that includes the role ID in the URL. e.g. `https://manage.auth0.com/*/roles/{role_ID}`
+
+**Start the API**
+When you're ready, you can start the API by running the command:
+```node src```
 
 ### App
 
