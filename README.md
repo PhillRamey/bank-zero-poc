@@ -52,7 +52,7 @@ All steps detailed below relat to the files contained within the `api` directory
 **Install dependencies**
 In your terminal, within the `api` directory, enter the following command to install the project dependencies:
 ```
-npm i body-parser cors express helmet morgan express-jwt express-jwt-authz jwks-rsa axios
+npm install
 ```
 **Set environment variables**
 1. Rename the `.env.example` file to `.env`
@@ -64,9 +64,28 @@ npm i body-parser cors express helmet morgan express-jwt express-jwt-authz jwks-
 2. For each of the listed roles, replace the role ID to match the roles you created earlier in the Auth0 Dashboard. One method to find the ID is to access the role within the Auth0 dashboard. This will load a page that includes the role ID in the URL. e.g. `https://manage.auth0.com/*/roles/{role_ID}`
 
 **Start the API**
+
 When you're ready, you can start the API by running the command:
-```node src```
+```
+node src
+```
 
 ### App
+
+**Install dependencies**
+In your terminal, with the `app` diretory, enter the following command to install the project dependencies:
+```
+npm install
+```
+
+**Update AUTH_CONFIG**
+In the `src/auth0-variables.js` file, update the `domain` and `clientId` values to match the values from the Single Page Web App you previously created.
+
+**Run the App**
+
+When you're ready, you can run the app by entering the command:
+```
+npm start
+```
 
 ### Auth0 Rules
