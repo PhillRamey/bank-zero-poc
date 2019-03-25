@@ -89,3 +89,6 @@ npm start
 ```
 
 ### Auth0 Rules
+To set up the white list rule, you can simply acces the [rules page in the Auth0 dashboard](https://manage.auth0.com/#/rules), create a rule and paste in the content of the `auth0-rules/email-domain-whitelist.js` file.
+
+As you continue down your Auth0 journey, it is also possible to automate the deployment of rules (and much more) via the [GitHub Deployments extension](https://auth0.com/docs/extensions/github-deploy).
