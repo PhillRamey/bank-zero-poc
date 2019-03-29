@@ -7,18 +7,24 @@ class EmployeeList extends Component {
 
     this.state = {
       employees: [],
-      accessToken: props.accessToken
+      accessToken: props.accessToken,
+      permissions: props.permissions
     };
   }
 
   async componentDidMount() {
-    const employees = (await axios.get('http://localhost:3001/employees', { headers: { 'Authorization': `Bearer ${this.state.accessToken}`}})).data;
-    this.setState({
-      employees,
-    });
+    if(this.state.permissions.includes("read:employees")) {
+      const employees = (await axios.get('http://localhost:3001/employees', { headers: { 'Authorization': `Bearer ${this.state.accessToken}`}})).data;
+      this.setState({
+        employees,
+      });
+    }
   }
 
   render() {
+    if(!this.state.permissions.includes("read:employees")) {
+      return null;
+    }
     return (
       <div>
         <h3>Employee List</h3>

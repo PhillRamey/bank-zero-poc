@@ -7,18 +7,24 @@ class CustomerList extends Component {
 
     this.state = {
       customers: [],
-      accessToken: props.accessToken
+      accessToken: props.accessToken,
+      permissions: props.permissions
     };
   }
 
   async componentDidMount() {
-    const customers = (await axios.get('http://localhost:3001/customers', { headers: { 'Authorization': `Bearer ${this.state.accessToken}`}})).data;
-    this.setState({
-      customers,
-    });
+    if(this.state.permissions.includes("read:customers")) {
+      const customers = (await axios.get('http://localhost:3001/customers', { headers: { 'Authorization': `Bearer ${this.state.accessToken}`}})).data;
+      this.setState({
+        customers,
+      });
+    }
   }
 
   render() {
+    if(!this.state.permissions.includes("read:customers")) {
+      return null;
+    }
     return (
       <div>
         <h3>Customer List</h3>
