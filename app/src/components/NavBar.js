@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import Login from "../components/Login";
 import Logout from "../components/Logout";
+import NavItems from "../components/NavItems";
 import { AuthConsumer } from "../authContext";
 
 function NavBar() {
@@ -11,12 +12,14 @@ function NavBar() {
         Bank Zero PoC
       </Link>
       <AuthConsumer>
-      {({ authenticated }) =>
+      {({ authenticated, user }) =>
         authenticated ? (
-          <Logout />
+          <div className="navbar">
+            <NavItems />
+            <Logout />
+          </div>
         ) : (
           <Login />
-
         )
       }
       </AuthConsumer>
