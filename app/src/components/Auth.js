@@ -24,7 +24,9 @@ class Auth extends Component {
   };
 
   initiateLogin = () => {
-    auth.authorize();
+    auth.authorize({
+      prompt: "login"
+    });
   };
 
   logout = (error) => {
@@ -33,6 +35,10 @@ class Auth extends Component {
     //If time allows, look into the error object being returned on logout.
     if (error && error != '[object Object]') {
       qs = '?error=' + encodeURI(error);
+      auth.logout({
+        returnTo: 'http://localhost:3000' + qs,
+        clientID: AUTH_CONFIG.clientId,
+      });
     }
     this.setState({
       authenticated: false,
@@ -40,10 +46,6 @@ class Auth extends Component {
         permissions: []
       },
       accessToken: ""
-    });
-    auth.logout({
-      returnTo: 'http://localhost:3000' + qs,
-      clientID: AUTH_CONFIG.clientId,
     });
   };
 
