@@ -19,10 +19,10 @@ function (user, context, callback) {
   const emailSplit = user.email.split('@');
   let userDomain = emailSplit[emailSplit.length -1].toLowerCase();
   
-  if (userDomain === 'bankzero.xyz') {
+  if (user.email === 'manager@bankzero.xyz' || user.email === 'president@bankzero.xyz') {
     roleId = roles.manager;
-  }
-  if (userDomain === 'teampandy.club' || userDomain === 'musubilabs.com') {
+  } else
+  if (userDomain === 'teampandy.club' || userDomain === 'musubilabs.com' || userDomain === 'bankzero.xyz') {
     roleId = roles.employee;
   }
   
