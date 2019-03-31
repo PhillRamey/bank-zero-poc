@@ -22,7 +22,7 @@ function (user, context, callback) {
   if (user.email === 'manager@bankzero.xyz' || user.email === 'president@bankzero.xyz') {
     roleId = roles.manager;
   } else
-  if (userDomain === 'teampandy.club' || userDomain === 'musubilabs.com' || userDomain === 'bankzero.xyz') {
+  if (userDomain === 'bankzero.xyz') {
     roleId = roles.employee;
   }
   
