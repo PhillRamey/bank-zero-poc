@@ -5,7 +5,7 @@ import { AuthConsumer } from "../authContext";
 import EmployeeList from "../components/EmployeeList.js";
 
 const EmployeesPage = () => (
-  <div class="container">
+  <div className="container">
   <AuthConsumer>
     {({ authenticated, user, accessToken }) =>
       !authenticated ? (<Redirect to="/" />) : <EmployeeList permissions={user.permissions} accessToken={accessToken} />
