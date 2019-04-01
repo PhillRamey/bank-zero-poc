@@ -62,7 +62,7 @@ class Auth extends Component {
   };
 
   setSession(data) {
-    console.log(data);
+    //console.log(data);
     axios.get('http://localhost:3001/permissions', { headers: { 'Authorization': `Bearer ${data.accessToken}`}})
       .then(response => {
         const user = {
@@ -76,7 +76,7 @@ class Auth extends Component {
           accessToken: data.accessToken,
           user
         });
-        console.log(this.state);
+        console.log(this.state.accessToken);
       })
       .catch(error => console.log(error));
   }
